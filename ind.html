@@ -1,0 +1,32 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+# Simulated employee data (you might have a database in practice)
+employee_data = {
+    'John Doe': {
+        'position': 'Manager',
+        'email': 'john@example.com',
+        'phone': '123-456-7890',
+        'image_url': 'path_to_image'
+    },
+    # Add more employee data as needed
+}
+
+@app.route('/')
+def index():
+    return render_template('ind.html')  # Render 'ind.html' for the input form
+
+@app.route('/submit_employee', methods=['POST'])
+def submit_employee():
+    if request.method == 'POST':
+        # Process and store employee data (similar to your existing code)
+        return "Employee details submitted successfully!"
+
+@app.route('/employee_dashboard/<employee_name>')
+def employee_dashboard(employee_name):
+    employee = employee_data.get(employee_name)
+    return render_template('ind.html', employee=employee)  # Change the template name if needed
+
+if __name__ == '__main__':
+    app.run(debug=True)
