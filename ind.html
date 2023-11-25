@@ -1,32 +1,100 @@
-from flask import Flask, render_template, request
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-ezI1UjrjASKFO9g3Ar7SNoRW+GPczxc3+jNxCAUErbV2FOF2mOzM3a2dIIsCpLI3" crossorigin="anonymous">
+    <style>
+        /* Add some basic styling for better presentation */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            animation: colorChange 10s infinite alternate; /* Animated background color */
+            background-color: #4caf50; /* Initial background color */
+        }
 
-app = Flask(__name__)
+        @keyframes colorChange {
+            0% {
+                background-color: #ff1d1d;
+            }
+            100% {
+                background-color: rgb(52, 219, 219);
+            }
+        }
 
-# Simulated employee data (you might have a database in practice)
-employee_data = {
-    'John Doe': {
-        'position': 'Manager',
-        'email': 'john@example.com',
-        'phone': '123-456-7890',
-        'image_url': 'path_to_image'
-    },
-    # Add more employee data as needed
-}
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for the form */
+            padding: 20px;
+            border-radius: 10px;
+        }
 
-@app.route('/')
-def index():
-    return render_template('ind.html')  # Render 'ind.html' for the input form
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+        }
 
-@app.route('/submit_employee', methods=['POST'])
-def submit_employee():
-    if request.method == 'POST':
-        # Process and store employee data (similar to your existing code)
-        return "Employee details submitted successfully!"
+        input,
+        input[type="submit"] {
+            width: calc(100% - 22px); /* Adjusted width to account for padding and border */
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
 
-@app.route('/employee_dashboard/<employee_name>')
-def employee_dashboard(employee_name):
-    employee = employee_data.get(employee_name)
-    return render_template('ind.html', employee=employee)  # Change the template name if needed
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
 
-if __name__ == '__main__':
-    app.run(debug=True)
+        input[type="file"] {
+            cursor: pointer;
+        }
+
+        /* Styling for Font Awesome icons */
+        .fa {
+            margin-right: 5px;
+        }
+
+        /* Logo styling */
+        .logo-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logo {
+            width: 100px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        h1 {
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-user"></i> Employee Details</h1>
+        <div class="employee-details">
+            {% if employee %}
+                <p>Name: {{ employee['name'] }}</p>
+                <p>Position: {{ employee['position'] }}</p>
+                <p>Email: {{ employee['email'] }}</p>
+                <p>Phone: {{ employee['phone'] }}</p>
+                <!-- Add image display code here if needed -->
+            {% else %}
+                <p>No details found for this employee.</p>
+            {% endif %}
+        </div>
+        <!-- Logo Section -->
+        <div class="logo-container">
+            <img src="C:\Users\RAFAN AHAMAD SHEIK\Downloads\DALL·E 2023-11-25 15.01.35 - Make a company logo about Hackathon.png" alt="Company Logo" class="logo">
+        </div>
+    </div>
+</body>
+</html>
